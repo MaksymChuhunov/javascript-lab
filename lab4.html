@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Підписки на журнали — JavaScript</title>
+</head>
+<body>
+  <h1>Підписки на журнали</h1>
+  <p>Відкрий консоль (F12) щоб побачити результат виконання коду</p>
+
+  <script>
+    const magazine = {
+      title: "Tech Today",
+      topic: "Технології",
+      period: "Щомісячно",
+      price: 200,
+      isActive: true,
+      info() {
+        console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`);
+      },
+      toggleActive() {
+        this.isActive = !this.isActive;
+      },
+      activate() {
+        this.isActive = true;
+      }
+    };
+
+    console.log("=== Початкова інформація про журнал ===");
+    magazine.info();
+
+    magazine.toggleActive();
+    console.log("=== Після зміни стану підписки ===");
+    magazine.info();
+
+
+    const library = [
+      { title: "Tech Today", topic: "Технології", period: "Щомісячно", price: 200, isActive: true, info() { console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`); } },
+      { title: "Nature World", topic: "Наука", period: "Щотижнево", price: 150, isActive: false, info() { console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`); } },
+      { title: "Art & Life", topic: "Мистецтво", period: "Щомісячно", price: 180, isActive: true, info() { console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`); } }
+    ];
+
+    function displayLibrary() {
+      console.log("=== Список усіх журналів ===");
+      library.forEach(mag => mag.info());
+    }
+
+    displayLibrary();
+
+    library.push({
+      title: "Health Pro",
+      topic: "Здоров'я",
+      period: "Щоквартально",
+      price: 120,
+      isActive: false,
+      info() {
+        console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`);
+      }
+    });
+
+    console.log("=== Після додавання нового журналу ===");
+    displayLibrary();
+
+
+
+    const sortedByPrice = [...library].sort((a, b) => a.price - b.price);
+    console.log("=== Сортування за ціною (зростання) ===");
+    sortedByPrice.forEach(mag => mag.info());
+
+    const inactiveSubs = library.filter(mag => !mag.isActive);
+    console.log("=== Неактивні підписки ===");
+    inactiveSubs.forEach(mag => mag.info());
+
+    const foundMagazine = library.find(mag => mag.topic === "Наука");
+    console.log("=== Знайдений журнал (тема 'Наука') ===");
+    if (foundMagazine) foundMagazine.info();
+
+
+    function addMagazineFromUser() {
+      const title = prompt("Введіть назву журналу:");
+      const topic = prompt("Введіть тематику журналу:");
+      const period = prompt("Введіть періодичність:");
+      const price = parseFloat(prompt("Введіть ціну підписки (грн):"));
+      const isActive = confirm("Чи активна підписка? (ОК = Так, Скасувати = Ні)");
+
+      const newMag = {
+        title,
+        topic,
+        period,
+        price,
+        isActive,
+        info() {
+          console.log(`Назва: ${this.title}, Тематика: ${this.topic}, Періодичність: ${this.period}, Ціна: ${this.price} грн, Активна: ${this.isActive ? "Так" : "Ні"}`);
+        }
+      };
+
+      library.push(newMag);
+      console.log("=== Після додавання користувацького журналу ===");
+      displayLibrary();
+    }
+
+
+
+
+    library.forEach(mag => {
+      mag.markAsActive = function() {
+        this.isActive = true;
+      };
+    });
+
+    function calculateAveragePrice() {
+      const total = library.reduce((sum, mag) => sum + mag.price, 0);
+      return (total / library.length).toFixed(2);
+    }
+
+    console.log(`Середня ціна підписки: ${calculateAveragePrice()} грн`);
+  </script>
+</body>
+</html>

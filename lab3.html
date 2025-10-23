@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Функції в JavaScript</title>
+</head>
+<body>
+  <script>
+    // --- Функція для створення повного імені ---
+    function getFullName(firstName, lastName) {
+      return `${firstName} ${lastName}`;
+    }
+
+    // --- Функція для виведення привітання ---
+    function showGreeting(fullName, age) {
+      alert(`Hello, ${fullName}! You are ${age} years old.`);
+    }
+
+    // --- Основна програма ---
+    const firstName = prompt("Введіть ваше ім'я:");
+    const lastName = prompt("Введіть ваше прізвище:");
+    const age = prompt("Введіть ваш вік:");
+
+    const fullName = getFullName(firstName, lastName);
+    showGreeting(fullName, age);
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <title>Практичне використання методів масивів</title>
+</head>
+<body>
+  <h1>Практична робота: Методи масивів у JavaScript</h1>
+  <p>Відкрий консоль (F12 → Console), щоб побачити результат виконання.</p>
+
+  <script>
+
+    const products = [
+      { name: "Ноутбук", category: "Електроніка", price: 25000, inStock: 5 },
+      { name: "Телефон", category: "Електроніка", price: 18000, inStock: 0 },
+      { name: "Навушники", category: "Аксесуари", price: 1200, inStock: 10 },
+      { name: "Мишка", category: "Аксесуари", price: 800, inStock: 3 },
+      { name: "Холодильник", category: "Побутова техніка", price: 30000, inStock: 2 }
+    ];
+    function getAvailableProducts() {
+      return products.filter(product => product.inStock > 0);
+    }
+
+    function findProductByName() {
+      const name = prompt("Введіть назву товару для пошуку:");
+      const product = products.find(p => p.name.toLowerCase() === name.toLowerCase());
+
+      if (product) {
+        console.log("Знайдений товар:", product);
+      } else {
+        console.log("Товар не знайдено");
+      }
+    }
+
+    console.log("=== Усі товари ===");
+    console.log(products);
+
+    console.log("=== Доступні товари (inStock > 0) ===");
+    console.log(getAvailableProducts());
+
+
+
+
+
+    const students = [
+      { name: "Іван", age: 19, grade: 90, group: "A" },
+      { name: "Олена", age: 20, grade: 75, group: "B" },
+      { name: "Максим", age: 18, grade: 95, group: "A" },
+      { name: "Андрій", age: 21, grade: 82, group: "B" },
+      { name: "Катерина", age: 19, grade: 88, group: "C" }
+    ];
+
+    function groupBy(students) {
+      return students.reduce((groups, student) => {
+        if (!groups[student.group]) {
+          groups[student.group] = [];
+        }
+        groups[student.group].push(student);
+        return groups;
+      }, {});
+    }
+
+    function sortStudentsByGrade(students) {
+      return [...students].sort((a, b) => b.grade - a.grade);
+    }
+
+    console.log("=== Студенти за групами ===");
+    console.log(groupBy(students));
+
+    console.log("=== Студенти, відсортовані за оцінками (спадання) ===");
+    console.log(sortStudentsByGrade(students));
+
+  </script>
+</body>
+</html>
